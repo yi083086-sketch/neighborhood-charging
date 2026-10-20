@@ -1,0 +1,4 @@
+# Netlify 静态部署（Drop）可识别的兜底重定向文件
+# 正常走 netlify.toml；此文件保证即使只拖拽 static/ 也能转发 API
+/api/* /.netlify/functions/api/:splat 200
+/* /index.html 200

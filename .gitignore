@@ -10,3 +10,10 @@ __pycache__/
 netlify/functions/lib/
 netlify/functions/*.dist-info/
 .netlify/
+
+# Netlify 函数目录只保留源码（依赖由构建命令在线安装）
+netlify/functions/api/*
+!netlify/functions/api/api.py
+
+# WorkBuddy 本地工作数据
+.workbuddy/
