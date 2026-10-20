@@ -1,0 +1,12 @@
+# Python 缓存
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 环境变量（禁止提交密钥）
+.env
+
+# Netlify 构建产物（依赖在 Netlify 构建时在线安装，无需本地提交）
+netlify/functions/lib/
+netlify/functions/*.dist-info/
+.netlify/

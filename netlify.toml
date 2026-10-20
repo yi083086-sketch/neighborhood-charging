@@ -1,0 +1,28 @@
+# Netlify 部署配置
+# - 静态资源（前端）发布到 CDN：publish = "static"
+# - FastAPI 打包为 Serverless Function：/api/* 转发到 /.netlify/functions/api
+# - 演示模式（DEMO_MODE=true）使用内存数据源，无需外部数据库
+
+[build]
+  command = "pip install -r requirements.netlify.txt -t netlify/functions"
+  publish = "static"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
+
+[functions]
+  directory = "netlify/functions"
+  # 将 FastAPI 应用源码一并打包进函数（依赖在 command 中安装到同目录）
+  included_files = ["app/**"]
+
+# API 网关转发：前端同源调用 /api/*，由函数处理
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# 单页应用兜底（前端为哈希路由，仅需根路径）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
